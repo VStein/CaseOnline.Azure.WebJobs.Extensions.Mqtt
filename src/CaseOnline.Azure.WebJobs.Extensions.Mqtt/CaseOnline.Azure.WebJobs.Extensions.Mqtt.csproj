@@ -45,7 +45,8 @@ For more information, please visit https://github.com/keesschollaart81/CaseOnlin
     <AdditionalFiles Include="stylecop.json" Link="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MQTTnet.Extensions.ManagedClient" Version="3.0.8" />
+    <PackageReference Include="MQTTnet" Version="3.0.13" />
+    <PackageReference Include="MQTTnet.Extensions.ManagedClient" Version="3.0.13" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="8.5.0.15942">
       <PrivateAssets>all</PrivateAssets>
@@ -60,7 +61,6 @@ For more information, please visit https://github.com/keesschollaart81/CaseOnlin
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions" Version="3.0.6" />
-    <PackageReference Include="MQTTnet" Version="3.0.8" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup> 

@@ -18,9 +18,9 @@ namespace CaseOnline.Azure.WebJobs.Extensions.Mqtt
             TopicStrings = topics;
         }
 
-        public MqttTriggerAttribute(string topic, Messaging.MqttQualityOfServiceLevel qos = Messaging.MqttQualityOfServiceLevel.AtLeastOnce, Messaging.NoLocal noLocal = Messaging.NoLocal.NotSet, Messaging.RetainAsPublished retainAsPublished = Messaging.RetainAsPublished.NotSet, Messaging.MqttRetainHandling retainHandling = Messaging.MqttRetainHandling.NotSet)
+        public MqttTriggerAttribute(Type mqttConfigCreatorType, string topic, Messaging.MqttQualityOfServiceLevel qos = Messaging.MqttQualityOfServiceLevel.AtLeastOnce, Messaging.NoLocal noLocal = Messaging.NoLocal.NotSet, Messaging.RetainAsPublished retainAsPublished = Messaging.RetainAsPublished.NotSet, Messaging.MqttRetainHandling retainHandling = Messaging.MqttRetainHandling.NotSet) : base(mqttConfigCreatorType)
         {
-            TopicFilter = new TopicFilter
+            TopicFilter = new MqttTopicFilter()
             {
                 Topic = topic,
                 NoLocal = noLocal switch
@@ -60,7 +60,7 @@ namespace CaseOnline.Azure.WebJobs.Extensions.Mqtt
             TopicStrings = topics;
         }
 
-        public TopicFilter TopicFilter { get; }
+        public MqttTopicFilter TopicFilter { get; }
 
         internal string[] TopicStrings { get; }
     }

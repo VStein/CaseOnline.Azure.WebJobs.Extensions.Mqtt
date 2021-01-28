@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-#if DEBUG                
-using System.Net.Security;
-#endif
 using System.Security.Cryptography.X509Certificates;
 using CaseOnline.Azure.WebJobs.Extensions.Mqtt.Config;
 using Microsoft.Azure.WebJobs;
@@ -90,13 +87,12 @@ namespace CaseOnline.Azure.WebJobs.Extensions.Mqtt.Bindings
 
             if (connectionString.Tls)
             {
-                var certificates = new List<byte[]>();
+                var certificates = new List<X509Certificate>();
                 if (connectionString.Certificate != null)
                 {
                     using (var cert = new X509Certificate(connectionString.Certificate))
                     {
-                        var serializedServerCertificate = cert.Export(X509ContentType.Cert);
-                        certificates.Add(serializedServerCertificate);
+                        certificates.Add(cert);
                     }
                 }
 
@@ -104,12 +100,7 @@ namespace CaseOnline.Azure.WebJobs.Extensions.Mqtt.Bindings
                 {
                     UseTls = true,
                     Certificates = certificates,
-#if DEBUG                   
-                    CertificateValidationCallback = (X509Certificate x, X509Chain y, SslPolicyErrors z, IMqttClientOptions o) =>
-                    {
-                        return true;
-                    },
-#endif
+
                     AllowUntrustedCertificates = false,
                     IgnoreCertificateChainErrors = false,
                     IgnoreCertificateRevocationErrors = false
